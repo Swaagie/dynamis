@@ -18,16 +18,14 @@ var enabled = ['cradle', 'redis'];
  * @api public
  */
 function Dynamis(type, persistence, options) {
-  var readable = Dynamis.predefine(this, Dynamis.predefine.READABLE)
-    , writable = Dynamis.predefine(this, Dynamis.predefine.WRITABLE);
+  this.fuse();
 
-  readable('readable', readable);
-  readable('options', options = options || {});
-  readable('api', Dynamis.predefine(this, { enumerable: true, writable: false }));
+  this.readable('options', options = options || {});
+  this.readable('api', Dynamis.predefine(this, { enumerable: true, writable: false }));
 
-  writable('_events', []);
-  writable('persistence');
-  writable('pre', options.before || {});
+  this.writable('_events', []);
+  this.writable('persistence');
+  this.writable('pre', options.before || {});
 
   //
   // Check if a persistence layer was provided.
