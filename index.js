@@ -2,7 +2,7 @@
 
 var fuse = require('fusing')
   , async = require('async')
-  , debug = require('debug')('cache');
+  , debug = require('debug')('dynamis');
 
 //
 // Supported persistence layers.
@@ -10,16 +10,16 @@ var fuse = require('fusing')
 var enabled = ['cradle', 'redis'];
 
 /**
- * Implementation of cache layer with basic get and set.
+ * Implementation of dynamis layer with basic get and set.
  *
  * @param {Object} persistence layer connection, e.g. couchdb or redis connection.
  * @param {Object} options
  * @Constructor
  * @api public
  */
-function Cache(type, persistence, options) {
-  var readable = Cache.predefine(this, Cache.predefine.READABLE)
-    , writable = Cache.predefine(this, Cache.predefine.WRITABLE);
+function Dynamis(type, persistence, options) {
+  var readable = Dynamis.predefine(this, Dynamis.predefine.READABLE)
+    , writable = Dynamis.predefine(this, Dynamis.predefine.WRITABLE);
 
   writable('_events', []);
   writable('persistence');
@@ -31,18 +31,18 @@ function Cache(type, persistence, options) {
   // Check if a persistence layer was provided.
   //
   if ('undefined' === typeof persistence) {
-    this.emit('error', new Error('[Cache] persistence layer is not provided'));
+    this.emit('error', new Error('[Dynamis] persistence layer is not provided'));
   }
 
   //
-  // Check if the provided type is supported by Cache.
+  // Check if the provided type is supported by Dynamis.
   //
   if (!~enabled.indexOf(type)) {
-    this.emit('error', new Error('[Cache] unknown persistence layer'));
+    this.emit('error', new Error('[Dynamis] unknown persistence layer'));
   }
 
   //
-  // Initialize cache persistence layer and listen to before emits, any command
+  // Initialize dynamis persistence layer and listen to before emits, any command
   // can `execute` the before hook so it is unknown when it will be called.
   //
   this.once('before', this.before);
@@ -52,7 +52,7 @@ function Cache(type, persistence, options) {
 //
 // Add emit capacities and fusing helper methods.
 //
-fuse(Cache, require('events').EventEmitter);
+fuse(Dynamis, require('events').EventEmitter);
 
 /**
  * Before init hook will be deferred.
@@ -62,14 +62,19 @@ fuse(Cache, require('events').EventEmitter);
  * @param {Array} args
  * @api private
  */
-Cache.readable('before', function before(context, fn, args) {
-  var cache = this
+Dynamis.readable('before', function before(context, fn, args) {
+  var dynamis = this
     , list = Object.keys(this.pre);
 
+  debug('Iterating %s before hooks', list.length);
   async.each(list, function iterate(item) {
-    cache[item].apply(cache, cache.pre[item].concat(arguments[arguments.length - 1]));
+    debug('Running before hook for: %s', item);
+
+    dynamis[item].apply(dynamis, dynamis.pre[item].concat(arguments[arguments.length - 1]));
   }, function done(error) {
-    if (error) cache.emit('error', error);
+    if (error) dynamis.emit('error', error);
+    debug('Before hook finished without errors, executing: %s', fn.name);
+
     fn.apply(context, args);
   });
 });
@@ -79,23 +84,26 @@ Cache.readable('before', function before(context, fn, args) {
  *
  * @param {Object} context persistence layer
  * @param {Function} fn function to call on context
- * @return {Cache} fluent interface
+ * @return {Dynamis} fluent interface
  * @api public
  */
-Cache.readable('execute', function execute(context, fn) {
+Dynamis.readable('execute', function execute(context, fn) {
   var args = Array.prototype.slice.call(arguments, 2);
 
   //
   // No more registered `once` before event, shirtcircuit the before/after loop
   // and execute the required function.
   //
-  if (!this._events.before) return fn.apply(context, args);
-  this.emit('before', context, fn, args);
+  if (!this._events.before) {
+    debug('No before hooks found, executing: %s', fn.name);
+    return fn.apply(context, args);
+  }
 
+  this.emit('before', context, fn, args);
   return this;
 });
 
 //
-// Export our cache layer.
+// Export our dynamis layer.
 //
-module.exports = Cache;
+module.exports = Dynamis;
