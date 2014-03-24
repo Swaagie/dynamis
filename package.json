@@ -1,0 +1,31 @@
+{
+  "name": "dynamis",
+  "version": "0.0.0",
+  "description": "Node.JS cache API for various persistence layers",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha $(shell find test -name '*.test.js')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Moveo/dynamis.git"
+  },
+  "keywords": [
+    "Cache",
+    "singular",
+    "API",
+    "persistence",
+    "couchDB",
+    "redis",
+    "levelDB",
+    "memory",
+    "node",
+    "js"
+  ],
+  "author": "Martijn Swaagman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Moveo/dynamis/issues"
+  },
+  "homepage": "https://github.com/Moveo/dynamis"
+}
