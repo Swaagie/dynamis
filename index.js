@@ -46,7 +46,7 @@ function Dynamis(type, persistence, options) {
   // can `execute` the before hook so it is unknown when it will be called.
   //
   this.once('before', this.before);
-  this.persistence = new (require('./' + type))(this, persistence);
+  this.persistence = new (require('./lib/' + type))(this, persistence);
 }
 
 //
