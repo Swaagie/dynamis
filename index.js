@@ -21,10 +21,12 @@ function Dynamis(type, persistence, options) {
   var readable = Dynamis.predefine(this, Dynamis.predefine.READABLE)
     , writable = Dynamis.predefine(this, Dynamis.predefine.WRITABLE);
 
+  readable('readable', readable);
+  readable('options', options = options || {});
+  readable('api', Dynamis.predefine(this, { enumerable: true, writable: false }));
+
   writable('_events', []);
   writable('persistence');
-  readable('api', readable);
-  readable('options', options = options || {});
   writable('pre', options.before || {});
 
   //
