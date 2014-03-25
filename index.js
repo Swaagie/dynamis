@@ -23,7 +23,6 @@ function Dynamis(type, persistence, options) {
   this.readable('options', options = options || {});
   this.readable('api', Dynamis.predefine(this, { enumerable: true, writable: false }));
 
-  this.writable('_events', []);
   this.writable('persistence');
   this.writable('pre', options.before || {});
 
