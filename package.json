@@ -1,6 +1,6 @@
 {
   "name": "dynamis",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Node.JS cache API for various persistence layers",
   "main": "index.js",
   "scripts": {
