@@ -2,12 +2,8 @@
 
 var fuse = require('fusing')
   , async = require('async')
+  , support = require('./support')
   , debug = require('debug')('dynamis');
-
-//
-// Supported persistence layers.
-//
-var enabled = ['cradle', 'redis'];
 
 /**
  * Implementation of dynamis layer with basic get and set.
@@ -36,9 +32,14 @@ function Dynamis(type, persistence, options) {
   //
   // Check if the provided type is supported by Dynamis.
   //
-  if (!~enabled.indexOf(type)) {
+  if (!~support.enabled.indexOf(type)) {
     this.emit('error', new Error('[Dynamis] unknown persistence layer'));
   }
+
+  //
+  // If `CACHE=destroy:store`, where store is a storage layer, add destroy hook.
+  //
+  if (process.env.CACHE === 'destroy:'+ support.list[type]) this.pre.destroy = [];
 
   //
   // Initialize dynamis persistence layer and listen to before emits, any command
