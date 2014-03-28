@@ -4,7 +4,7 @@
   "description": "Node.JS cache API for various persistence layers",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha $(shell find test -name '*.test.js')",
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha $(find test -name '*.test.js')",
     "coverage": "NODE_ENV=test ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js || true && rm -rf ./coverage"
   },
   "repository": {
@@ -42,6 +42,8 @@
     "istanbul": "~0.2.6",
     "sinon": "~1.9.0",
     "sinon-chai": "~2.5.0",
-    "pre-commit": "~0.0.4"
+    "pre-commit": "~0.0.4",
+    "cradle": "~0.6.7",
+    "redis": "~0.10.1"
   }
 }
