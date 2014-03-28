@@ -68,7 +68,7 @@ Dynamis.readable('before', function before(context, fn, args) {
 
   debug('Iterating %s before hooks', list.length);
   async.each(list, function iterate(item, next) {
-    var provided = dynamis.pre[item] || [ next ];
+    var provided = dynamis.pre[item] || [];
     if (!Array.isArray(provided)) provided = [ provided ];
 
     debug('Running before hook: %s', item);
