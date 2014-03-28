@@ -57,20 +57,22 @@ fuse(Dynamis, require('events').EventEmitter);
 /**
  * Before init hook will be deferred.
  *
- * @param {Object} fn
- * @param {}
- * @param {Array} args
+ * @param {Object} context on which to call fn
+ * @param {Function} fn function to call when before hooks are done
+ * @param {Array} args arguments to apply to fn
  * @api private
  */
 Dynamis.readable('before', function before(context, fn, args) {
-  var dynamis = this
-    , list = Object.keys(this.pre);
+  var list = Object.keys(this.pre)
+    , dynamis = this;
 
   debug('Iterating %s before hooks', list.length);
-  async.each(list, function iterate(item) {
-    debug('Running before hook for: %s', item);
+  async.each(list, function iterate(item, next) {
+    var provided = dynamis.pre[item] || [ next ];
+    if (!Array.isArray(provided)) provided = [ provided ];
 
-    dynamis[item].apply(dynamis, dynamis.pre[item].concat(arguments[arguments.length - 1]));
+    debug('Running before hook: %s', item);
+    dynamis[item].apply(dynamis, provided.concat(next));
   }, function done(error) {
     if (error) dynamis.emit('error', error);
     debug('Before hook finished without errors, executing: %s', fn.name);
