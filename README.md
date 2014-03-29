@@ -67,7 +67,7 @@ developed layers should implement all methods below.
 
 Get a cached value from the persistence layer.
 
-**key:** String _(required)_ database key
+**key:** String _(required)_ database key<br>
 **done:** Function _(required)_ completion callback
 
 ```js
@@ -80,8 +80,8 @@ dynamis.get('key', function done(error, value) {
 
 Store key:value data in the persistence layer.
 
-**key:** String _(required)_ database key
-**value:** String _(required)_ value to JSON.stringify
+**key:** String _(required)_ database key<br>
+**value:** String _(required)_ value to JSON.stringify<br>
 **done:** Function _(required)_ completion callback
 
 ```js
@@ -95,7 +95,7 @@ dynamis.set('key', value, function done(error, result) {
 
 Delete the key and value from the persistence layer
 
-**key:** String _(required)_ database key
+**key:** String _(required)_ database key<br>
 **done:** Function _(required)_ completion callback
 
 ```js
@@ -110,8 +110,8 @@ Authenticate against the connection and/or persistence layer. Supplying `auth` w
 only a password will suffice if the persistence layer is Redis. Redis only has
 password authentication and no notion of users.
 
-**username:** String _(required)_ username
-**password:** String _(required)_ password
+**username:** String _(required)_ username<br>
+**password:** String _(required)_ password<br>
 **done:** Function _(required)_ completion callback
 
 ```js
@@ -140,8 +140,8 @@ All API calls will flow through this function. `Execute` will emit `before` so t
 any [registered functions](#dynamisbefore) will be executed. `before` will only be
 run once, thereafter any provided function will executed immediatly.
 
-**context:** Object _(required)_ usually the persistence layer
-**fn:** Function _(required)_ persistance layer method to call on context
+**context:** Object _(required)_ usually the persistence layer<br>
+**fn:** Function _(required)_ persistance layer method to call on context<br>
 **arguments:** Mixed _(optional)_ additional arguments to supply to the function
 
 ```js
@@ -153,8 +153,8 @@ dynamis.execute(redis.database, redis.database.set, key, value, done)
 Loops over a set of API functions defined in `dynamis.pre`. Before will be executed
 once, as soon as any API method is called, per example [authentication](#dynamis-auth).
 
-**context:** Object _(required)_ usually the persistence layer
-**fn:** Function _(required)_ persistance layer method to call on context
+**context:** Object _(required)_ usually the persistence layer<br>
+**fn:** Function _(required)_ persistance layer method to call on context<br>
 **args:** Array _(required)_ arguments to supply to the function
 
 ```js
