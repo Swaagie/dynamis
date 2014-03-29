@@ -41,9 +41,9 @@ var dynamis = new Dynamis('redis', redis, options);
 
 ## Supported
 
-Memory: Memcached
-Redis: Node-redis
-CouchDB: Cradle
+- Memory: Memcached
+- Redis: Node-redis
+- CouchDB: Cradle
 
 ## Table of Contents
 
