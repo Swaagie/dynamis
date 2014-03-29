@@ -1,6 +1,6 @@
 {
   "name": "dynamis",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Node.JS cache API for various persistence layers",
   "main": "index.js",
   "scripts": {
@@ -32,7 +32,8 @@
   "dependencies": {
     "async": "~0.2.10",
     "debug": "~0.7.4",
-    "fusing": "~0.1.0"
+    "fusing": "~0.1.0",
+    "memcached": "~0.2.8"
   },
   "devDependencies": {
     "coveralls": "~2.8.0",

@@ -23,11 +23,11 @@ var Dynamis = require('dynamis');
   , redis = require('redis').createClient();
 
 //
-// Database selection is optional for redis, but required for other layers.
+// Database selection is optional for redis, but may be required for other layers.
 // Authenticate will be called once as soon as any method is executed.
 //
 var options = {
-  database: 0,
+  database: 1,
   before: {
     auth: [ 'mypass' ]
   }

@@ -16,7 +16,7 @@ chai.use(sinonChai);
 exports.Dynamis = require('../');
 exports.redis = redis.createClient();
 exports.cradle = new cradle.Connection;
-exports.mem = new Memcached;
+exports.memcache = new Memcached;
 
 //
 // Expose our assertations.
