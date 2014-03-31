@@ -4,7 +4,7 @@
 [npmimgurl]: https://badge.fury.io/js/dynamis.png
 [coverage]: http://coveralls.io/repos/Moveo/dynamis/badge.png?branch=master
 
-** Dynamis is still under heavy development, be cautious with production use**
+**Dynamis is still under heavy development, be cautious with production use**
 
 Node.JS cache API for various persistence layers. Dynamis aims to implement a
 minimal cache API with maximal reusability. If you don't want to bother with
