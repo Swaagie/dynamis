@@ -47,7 +47,7 @@ developed layers should implement all methods below.
 - [Dynamis: set](#dynamis-set)
 - [Dynamis: del](#dynamis-del)
 - [Dynamis: expire](#dynamis-expire)
-- [Dynamis: destroy](#dynamis-destroy)
+- [Dynamis: flush](#dynamis-flush)
 
 **Internal**
 
@@ -114,16 +114,16 @@ dynamis.del('key', function done(error, result) {
 });
 ```
 
-### Dynamis: destroy
+### Dynamis: flush
 
 Flush all data that is in the persistence layer. This feature is also available by
-setting a environment variable, per example `CACHE=destroy:redis` would flush all
-data from the redis database by adding `destroy` as [before hook](#dynamisbefore).
+setting a environment variable, per example `CACHE=flush:redis` would flush all
+data from the redis database by adding `flush` as [before hook](#dynamisbefore).
 
 **done:** Function _(required)_ completion callback
 
 ```js
-dynamis.destroy(function done(error, result) {
+dynamis.flush(function done(error, result) {
   console.log(result);
 });
 ```

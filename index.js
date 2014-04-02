@@ -37,9 +37,9 @@ function Dynamis(type, persistence, options) {
   }
 
   //
-  // If `CACHE=destroy:store`, where store is a storage layer, add destroy hook.
+  // If `CACHE=flush:store`, where store is a storage layer, add flush hook.
   //
-  if (process.env.CACHE === 'destroy:'+ support.list[type]) this.pre.destroy = [];
+  if (process.env.CACHE === 'flush:'+ support.list[type]) this.pre.flush = [];
 
   //
   // Initialize dynamis persistence layer and listen to before emits, any command
