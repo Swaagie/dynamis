@@ -46,6 +46,7 @@ developed layers should implement all methods below.
 - [Dynamis: get](#dynamis-get)
 - [Dynamis: set](#dynamis-set)
 - [Dynamis: del](#dynamis-del)
+- [Dynamis: expire](#dynamis-expire)
 - [Dynamis: destroy](#dynamis-destroy)
 
 **Internal**
@@ -72,15 +73,30 @@ dynamis.get('key', function done(error, value) {
 
 ### Dynamis: set
 
-Store key:value data in the persistence layer.
+Store key:value data in the persistence layer, with an optional time to live.
 
 **key:** String _(required)_ database key<br>
 **value:** String _(required)_ value to JSON.stringify<br>
+**ttl:** Number _(optional)_ time to live in seconds, defaults to 0 (never)<br>
 **done:** Function _(required)_ completion callback
 
 ```js
 var value = { valid: 'json' };
 dynamis.set('key', value, function done(error, result) {
+  console.log(result);
+});
+```
+
+### Dynamis: expire
+
+Set or refresh a time to live on the key.
+
+**key:** String _(required)_ database key<br>
+**ttl:** Number _(required)_ time to live in seconds<br>
+**done:** Function _(required)_ completion callback
+
+```
+dynamis.expire('key', 10, function done(error, result) {
   console.log(result);
 });
 ```
