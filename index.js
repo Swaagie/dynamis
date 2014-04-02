@@ -52,7 +52,7 @@ function Dynamis(type, persistence, options) {
 //
 // Add emit capacities and fusing helper methods.
 //
-fuse(Dynamis, require('events').EventEmitter);
+fuse(Dynamis, require('eventemitter3'));
 
 /**
  * Before init hook will be deferred.
@@ -93,7 +93,7 @@ Dynamis.readable('execute', function execute(context, fn) {
   var args = Array.prototype.slice.call(arguments, 2);
 
   //
-  // No more registered `once` before event, shirtcircuit the before/after loop
+  // No more registered `once` before event, shirtcircuit the before loop
   // and execute the required function.
   //
   if (!this._events.before) {

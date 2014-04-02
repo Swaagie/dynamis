@@ -32,19 +32,20 @@
   "dependencies": {
     "async": "~0.2.10",
     "debug": "~0.7.4",
+    "eventemitter3": "~0.1.1",
     "fusing": "~0.1.0"
   },
   "devDependencies": {
-    "coveralls": "~2.8.0",
-    "mocha": "~1.18.0",
-    "mocha-lcov-reporter": "~0.0.1",
     "chai": "~1.9.0",
+    "coveralls": "~2.8.0",
+    "cradle": "~0.6.7",
     "istanbul": "~0.2.6",
     "memcached": "~0.2.8",
-    "sinon": "~1.9.0",
-    "sinon-chai": "~2.5.0",
+    "mocha": "~1.18.0",
+    "mocha-lcov-reporter": "~0.0.1",
     "pre-commit": "~0.0.4",
-    "cradle": "~0.6.7",
-    "redis": "~0.10.1"
+    "redis": "~0.10.1",
+    "sinon": "~1.9.0",
+    "sinon-chai": "~2.5.0"
   }
 }

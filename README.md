@@ -25,20 +25,9 @@ var Dynamis = require('dynamis');
   , redis = require('redis').createClient();
 
 //
-// Database selection is optional for redis, but may be required for other layers.
-// Authenticate will be called once as soon as any method is executed.
-//
-var options = {
-  database: 1,
-  before: {
-    auth: [ 'mypass' ]
-  }
-}
-
-//
 // Initialize cache layer, by providing the connection object and options.
 //
-var dynamis = new Dynamis('redis', redis, options);
+var dynamis = new Dynamis('redis', redis, { database: 1 });
 ```
 
 ## Supported
@@ -57,13 +46,16 @@ developed layers should implement all methods below.
 - [Dynamis: get](#dynamis-get)
 - [Dynamis: set](#dynamis-set)
 - [Dynamis: del](#dynamis-del)
-- [Dynamis: auth](#dynamis-auth)
 - [Dynamis: destroy](#dynamis-destroy)
 
 **Internal**
 
 - [Dynamis.before](#dynamisbefore)
 - [Dynamis.execute](#dynamisexecute)
+
+**Events**
+
+- [Dynamis.on: error](#dynamison-error)
 
 ### Dynamis: get
 
@@ -106,22 +98,6 @@ dynamis.del('key', function done(error, result) {
 });
 ```
 
-### Dynamis: auth
-
-Authenticate against the connection and/or persistence layer. Supplying `auth` with
-only a password will suffice if the persistence layer is Redis. Redis only has
-password authentication and no notion of users.
-
-**username:** String _(required)_ username<br>
-**password:** String _(required)_ password<br>
-**done:** Function _(required)_ completion callback
-
-```js
-dynamis.auth('username', 'password', function done(error, result) {
-  console.log(result);
-});
-```
-
 ### Dynamis: destroy
 
 Flush all data that is in the persistence layer. This feature is also available by
@@ -153,7 +129,7 @@ dynamis.execute(redis.database, redis.database.set, key, value, done)
 ### Dynamis.before
 
 Loops over a set of API functions defined in `dynamis.pre`. Before will be executed
-once, as soon as any API method is called, per example [authentication](#dynamis-auth).
+once, as soon as any API method is called, per example `dynamis.create` in cradle.
 
 **context:** Object _(required)_ usually the persistence layer<br>
 **fn:** Function _(required)_ persistance layer method to call on context<br>
@@ -162,3 +138,25 @@ once, as soon as any API method is called, per example [authentication](#dynamis
 ```js
 dynamis.before(redis.database, redis.database.set, [ key, value, done ])
 ```
+
+### Dynamis.on: error
+
+Errors or failures emitted by the persistence layer will be emitted from dynamis.
+Handling connection or persistence errors from any layer will be done for you.
+Ignoring these errors is possible, [EventEmitter3] will **not** throw the error
+when no listener is registered.
+
+```js
+var Dynamis = require('dynamis');
+  , redis = require('redis').createClient();
+
+//
+// Initialize cache layer and listen to emitted errors.
+//
+var dynamis = new Dynamis('redis', redis, {});
+dynamis.on('error', function handleError() {
+  console.log(arguments);
+});
+```
+
+[EventEmitter3]: https://github.com/3rd-Eden/EventEmitter3
