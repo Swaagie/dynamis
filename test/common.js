@@ -11,12 +11,21 @@ chai.config.includeStack = true;
 chai.use(sinonChai);
 
 //
-// Expose Cradle, Redis, Cradle instance.
+// Expose Dynamis and layer helpers.
 //
 exports.Dynamis = require('../');
-exports.redis = redis.createClient();
-exports.cradle = new cradle.Connection;
-exports.memcache = new Memcached;
+
+exports.redis = function () {
+  return redis.createClient();
+};
+
+exports.cradle = function () {
+  return new cradle.Connection;
+};
+
+exports.memcache = function () {
+  return new Memcached;
+};
 
 //
 // Expose our assertations.

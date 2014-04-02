@@ -5,15 +5,15 @@ describe('Dynamis', function () {
     , expect = common.expect
     , sinon = common.sinon
     , Dynamis = common.Dynamis
-    , redis = common.redis
-    , cradle = common.cradle
-    , dynamis;
+    , redis, dynamis;
 
   beforeEach(function () {
+    redis = common.redis();
     dynamis = new Dynamis('redis', redis, { database: 0 });
   });
 
   afterEach(function () {
+    redis = null;
     dynamis = null;
   });
 
@@ -35,7 +35,6 @@ describe('Dynamis', function () {
   it('instance has property persistence', function () {
     expect(dynamis).to.have.property('persistence');
     expect(dynamis.persistence).to.be.an('object');
-    expect(dynamis.persistence.domain).to.equal(null);
     expect(dynamis.persistence.database.port).to.equal(6379);
     expect(dynamis.persistence.database.host).to.equal('127.0.0.1');
   });
