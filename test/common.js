@@ -15,6 +15,10 @@ chai.use(sinonChai);
 //
 exports.Dynamis = require('../');
 
+exports.persist = function (layer) {
+  return require('../lib/' + layer);
+};
+
 exports.redis = function () {
   return redis.createClient();
 };
