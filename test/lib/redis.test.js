@@ -103,7 +103,7 @@ describe('Redis persistence layer', function () {
       });
     });
 
-    it('has optional 3rd argument for TTL in seconds', function () {
+    it('has optional 3rd argument for TTL in seconds', function (done) {
       var ttl = 10
         , data = { json: 'data' };
 
@@ -116,6 +116,7 @@ describe('Redis persistence layer', function () {
 
           // be a bit defensive, the test can't run longer than 2 seconds.
           expect(result).to.be.above(7);
+          done();
         });
       });
     });
