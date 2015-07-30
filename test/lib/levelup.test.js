@@ -1,4 +1,4 @@
-describe.only('Levelup persistence layer', function () {
+describe('Levelup persistence layer', function () {
   'use strict';
 
   var common = require('../common')
