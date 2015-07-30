@@ -35,8 +35,8 @@ describe('Dynamis', function () {
   it('instance has property persistence', function () {
     expect(dynamis).to.have.property('persistence');
     expect(dynamis.persistence).to.be.an('object');
-    expect(dynamis.persistence.database.port).to.equal(6379);
-    expect(dynamis.persistence.database.host).to.equal('127.0.0.1');
+    expect(dynamis.persistence.database.connectionOption.port).to.equal(6379);
+    expect(dynamis.persistence.database.connectionOption.host).to.equal('127.0.0.1');
   });
 
   it('instance has property pre', function () {

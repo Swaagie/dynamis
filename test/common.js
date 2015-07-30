@@ -7,7 +7,6 @@ var chai = require('chai')
   , Memcached = require('memcached')
   , cradle = require('cradle');
 
-chai.config.includeStack = true;
 chai.use(sinonChai);
 
 //
