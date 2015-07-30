@@ -2,10 +2,7 @@
 
 var chai = require('chai')
   , sinon = require('sinon')
-  , sinonChai = require('sinon-chai')
-  , redis = require('redis')
-  , Memcached = require('memcached')
-  , cradle = require('cradle');
+  , sinonChai = require('sinon-chai');
 
 chai.use(sinonChai);
 
@@ -19,15 +16,19 @@ exports.persist = function (layer) {
 };
 
 exports.redis = function () {
-  return redis.createClient();
+  return require('redis').createClient();
 };
 
+exports.levelup = function () {
+  return require('levelup')('/tmp/test');
+}
+
 exports.cradle = function () {
-  return new cradle.Connection;
+  return new require('cradle').Connection;
 };
 
 exports.memcache = function () {
-  return new Memcached;
+  return new (require('memcached'));
 };
 
 //
