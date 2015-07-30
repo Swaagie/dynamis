@@ -1,10 +1,12 @@
-# Dynamis [![Build Status][status]](https://travis-ci.org/Moveo/dynamis) [![NPM version][npmimgurl]](http://npmjs.org/package/dynamis) [![Coverage Status][coverage]](http://coveralls.io/r/Moveo/dynamis?branch=master)
+# Dynamis
 
-[status]: https://travis-ci.org/Moveo/dynamis.png?branch=master
-[npmimgurl]: https://badge.fury.io/js/dynamis.png
-[coverage]: http://coveralls.io/repos/Moveo/dynamis/badge.png?branch=master
+[![Version npm][version]](http://browsenpm.org/package/dynamis)[![Build Status][build]](https://travis-ci.org/Swaagie/dynamis)[![Dependencies][david]](https://david-dm.org/Swaagie/dynamis)[![Coverage Status][cover]](https://coveralls.io/r/Swaagie/dynamis?branch=master)
 
-**Dynamis is still under heavy development, be cautious with production use**
+[version]: http://img.shields.io/npm/v/dynamis.svg?style=flat-square
+[build]: http://img.shields.io/travis/Swaagie/dynamis/master.svg?style=flat-square
+[david]: https://img.shields.io/david/Swaagie/dynamis.svg?style=flat-square
+[cover]: http://img.shields.io/coveralls/Swaagie/dynamis/master.svg?style=flat-square
+
 
 Node.JS cache API for various persistence layers. Dynamis aims to implement a
 minimal cache API with maximal reusability. If you don't want to bother with
