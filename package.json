@@ -4,8 +4,10 @@
   "description": "Node.JS cache API for various persistence layers",
   "main": "index.js",
   "scripts": {
+    "watch": "mocha --watch $(find test -name '*.test.js')",
     "test": "mocha --reporter spec $(find test -name '*.test.js')",
-    "coverage": "istanbul cover ./node_modules/.bin/_mocha $(find test -name '*.test.js') --report lcovonly -- -R spec"
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha -- $(find test -name '*.test.js')",
+    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- $(find test -name '*.test.js')"
   },
   "repository": {
     "type": "git",
