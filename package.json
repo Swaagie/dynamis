@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Moveo/dynamis.git"
+    "url": "git://github.com/swaagie/dynamis.git"
   },
   "keywords": [
     "Cache",
@@ -28,9 +28,9 @@
   "author": "Martijn Swaagman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Moveo/dynamis/issues"
+    "url": "https://github.com/swaagie/dynamis/issues"
   },
-  "homepage": "https://github.com/Moveo/dynamis",
+  "homepage": "https://github.com/swaagie/dynamis",
   "dependencies": {
     "async": "~1.4.0",
     "debug": "~2.2.0",
