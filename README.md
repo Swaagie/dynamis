@@ -1,8 +1,8 @@
-# Dynamis [![Build Status][status]](https://travis-ci.org/Moveo/dynamis) [![NPM version][npmimgurl]](http://npmjs.org/package/dynamis) [![Coverage Status][coverage]](http://coveralls.io/r/Moveo/dynamis?branch=master)
+# Dynamis [![Build Status][status]](https://travis-ci.org/swaagie/dynamis) [![NPM version][npmimgurl]](http://npmjs.org/package/dynamis) [![Coverage Status][coverage]](http://coveralls.io/r/swaagie/dynamis?branch=master)
 
-[status]: https://travis-ci.org/Moveo/dynamis.png?branch=master
+[status]: https://travis-ci.org/swaagie/dynamis.png?branch=master
 [npmimgurl]: https://badge.fury.io/js/dynamis.png
-[coverage]: http://coveralls.io/repos/Moveo/dynamis/badge.png?branch=master
+[coverage]: http://coveralls.io/repos/swaagie/dynamis/badge.png?branch=master
 
 **Dynamis is still under heavy development, be cautious with production use**
 
@@ -17,7 +17,7 @@ than you should want to use any persistence layer directly.
 npm install dynamis --save
 ```
 
-Dynamis does not depend on the supported perisistence layers to keep the amount of
+Dynamis does not depend on the supported persistence layers to keep the amount of
 dependencies small. You'll have to add your desired persistence layer to t
 
 ```js
@@ -32,7 +32,8 @@ var dynamis = new Dynamis('redis', redis, { database: 1 });
 
 ## Supported
 
-- Memory: Memcached
+- Memory: In process memory.
+- Memcached: Memcached
 - Redis: Node-redis
 - CouchDB: Cradle
 
@@ -132,10 +133,10 @@ dynamis.flush(function done(error, result) {
 
 All API calls will flow through this function. `Execute` will emit `before` so that
 any [registered functions](#dynamisbefore) will be executed. `before` will only be
-run once, thereafter any provided function will executed immediatly.
+run once, thereafter any provided function will executed immediately.
 
 **context:** Object _(required)_ usually the persistence layer<br>
-**fn:** Function _(required)_ persistance layer method to call on context<br>
+**fn:** Function _(required)_ persistence layer method to call on context<br>
 **arguments:** Mixed _(optional)_ additional arguments to supply to the function
 
 ```js
@@ -148,7 +149,7 @@ Loops over a set of API functions defined in `dynamis.pre`. Before will be execu
 once, as soon as any API method is called, per example `dynamis.create` in cradle.
 
 **context:** Object _(required)_ usually the persistence layer<br>
-**fn:** Function _(required)_ persistance layer method to call on context<br>
+**fn:** Function _(required)_ persistence layer method to call on context<br>
 **args:** Array _(required)_ arguments to supply to the function
 
 ```js
@@ -175,4 +176,4 @@ dynamis.on('error', function handleError() {
 });
 ```
 
-[EventEmitter3]: https://github.com/3rd-Eden/EventEmitter3
+[EventEmitter3]: https://github.com/primus/EventEmitter3
