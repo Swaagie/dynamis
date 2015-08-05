@@ -38,6 +38,7 @@ var dynamis = new Dynamis('redis', redis, { database: 1 });
 - Memcached: Memcached
 - Redis: Node-redis
 - CouchDB: Cradle
+- LevelDB: LevelUp
 
 ## Table of Contents
 
