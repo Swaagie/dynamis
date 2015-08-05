@@ -1,11 +1,13 @@
 {
   "name": "dynamis",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "Node.JS cache API for various persistence layers",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test ./node_modules/.bin/mocha $(find test -name '*.test.js')",
-    "coverage": "NODE_ENV=test ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha $(find test -name '*.test.js') --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js || true && rm -rf ./coverage"
+    "watch": "mocha --watch $(find test -name '*.test.js')",
+    "test": "mocha --reporter spec $(find test -name '*.test.js')",
+    "coverage": "istanbul cover ./node_modules/.bin/_mocha -- $(find test -name '*.test.js')",
+    "test-travis": "istanbul cover node_modules/.bin/_mocha --report lcovonly -- $(find test -name '*.test.js')"
   },
   "repository": {
     "type": "git",
@@ -30,22 +32,24 @@
   },
   "homepage": "https://github.com/Moveo/dynamis",
   "dependencies": {
-    "async": "~0.2.10",
-    "debug": "~0.7.4",
-    "eventemitter3": "~0.1.1",
-    "fusing": "~0.1.0"
+    "async": "~1.4.0",
+    "debug": "~2.2.0",
+    "eventemitter3": "~1.1.1",
+    "fusing": "~1.0.0"
   },
   "devDependencies": {
-    "chai": "~1.9.0",
-    "coveralls": "~2.8.0",
+    "chai": "~3.2.0",
+    "coveralls": "~2.11.3",
     "cradle": "~0.6.7",
-    "istanbul": "~0.2.6",
-    "memcached": "~0.2.8",
-    "mocha": "~1.18.0",
+    "istanbul": "~0.3.17",
+    "leveldown": "~1.4.0",
+    "levelup": "~1.2.1",
+    "memcached": "~2.1.0",
+    "mocha": "~2.2.5",
     "mocha-lcov-reporter": "~0.0.1",
-    "pre-commit": "~0.0.4",
-    "redis": "~0.10.1",
-    "sinon": "~1.9.0",
-    "sinon-chai": "~2.5.0"
+    "pre-commit": "~1.0.10",
+    "redis": "~0.12.1",
+    "sinon": "~1.15.4",
+    "sinon-chai": "~2.8.0"
   }
 }

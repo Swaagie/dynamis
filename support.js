@@ -3,12 +3,13 @@
 //
 // Supported persistence layers.
 //
-exports.enabled = ['cradle', 'redis'];
+exports.enabled = ['levelup', 'cradle', 'redis'];
 
 //
 // List of stores per persistence layer.
 //
 exports.list = {
+  levelup: 'leveldb',
   cradle: 'couchdb',
   redis: 'redis'
 };

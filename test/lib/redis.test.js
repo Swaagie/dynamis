@@ -88,7 +88,7 @@ describe('Redis persistence layer', function () {
       });
     });
 
-    it('will JSON.stringify object values', function () {
+    it('will JSON.stringify object values', function (done) {
       var data = { json: 'data' };
 
       dynamis.set(key, data, function (error, result) {
@@ -97,7 +97,7 @@ describe('Redis persistence layer', function () {
 
         redis.get(key, function (error, result) {
           expect(error).to.equal(null);
-          expect(JSON.parse(result)).to.equal(data);
+          expect(result).to.equal(JSON.stringify(data));
           done();
         });
       });
@@ -255,15 +255,15 @@ describe('Redis persistence layer', function () {
       expect(dynamis.flush).to.be.a('function');
     });
 
-    it('will flush the entire database', function () {
+    it('will flush the entire database', function (done) {
       redis.keys('*', function (error, result) {
         expect(error).to.equal(null);
         expect(result).to.be.an('array');
         expect(result).to.include(key);
 
-        dynamis.flush(function (error, results) {
+        dynamis.flush(function (error, result) {
           expect(error).to.equal(null);
-          expect(time).to.equal('OK');
+          expect(result).to.equal('OK');
 
           redis.keys('*', function (error, result) {
             expect(error).to.equal(null);
