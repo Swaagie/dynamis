@@ -108,6 +108,22 @@ describe('Memory persistence layer', function () {
         done();
       });
     });
+
+    it('returns a clone of the set object', function (done) {
+      dynamis.set('foo', { example: 'lol' }, function () {
+        dynamis.get('foo', function (error, result) {
+          expect(result).to.be.a('object');
+          expect(result.lol).to.equal(undefined);
+
+          result.lol = 1;
+
+          dynamis.get('foo', function (error, res) {
+            expect(res.lol).to.equal(undefined);
+            done();
+          });
+        });
+      });
+    });
   });
 
   describe('#del', function () {
