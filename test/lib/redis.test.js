@@ -2,6 +2,7 @@ describe('Redis persistence layer', function () {
   'use strict';
 
   var common = require('../common')
+    , binary = require('binarypack')
     , expect = common.expect
     , sinon = common.sinon
     , Dynamis = common.Dynamis
@@ -130,6 +131,26 @@ describe('Redis persistence layer', function () {
         expect(error.message).to.equal('Converting circular structure to JSON');
         expect(result).to.equal(undefined);
         done();
+      });
+    });
+
+    it('will binary-pack buffers', function (done) {
+      var data = new Buffer('test');
+
+      redis = require('redis').createClient({ return_buffers: true });
+      dynamis = new Dynamis('redis', redis, { database: 10 });
+      persist = new Persist(dynamis, redis);
+
+      dynamis.set(key, data, function (error, result) {
+        expect(error).to.equal(null);
+        expect(result.toString()).to.equal('OK');
+
+        redis.get(key, function  (error, result) {
+          expect(error).to.equal(null);
+          expect(binary.unpack(result).length).to.equal(data.length);
+          expect(binary.unpack(result).toString()).to.equal(data.toString());
+          done();
+        });
       });
     });
   });
