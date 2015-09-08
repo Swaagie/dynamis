@@ -33,7 +33,7 @@
   "homepage": "https://github.com/swaagie/dynamis",
   "dependencies": {
     "async": "~1.4.0",
-    "binarypack": "0.0.4",
+    "binarypack": "~0.0.4",
     "clone": "~1.0.2",
     "debug": "~2.2.0",
     "eventemitter3": "~1.1.1",
