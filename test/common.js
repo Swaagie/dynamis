@@ -21,7 +21,7 @@ exports.redis = function () {
 
 exports.levelup = function () {
   return require('levelup')('/tmp/test');
-}
+};
 
 exports.cradle = function () {
   return new require('cradle').Connection;
