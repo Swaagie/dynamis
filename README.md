@@ -1,5 +1,7 @@
 # Dynamis
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Swaagie/dynamis.svg)](https://greenkeeper.io/)
+
 [![Version npm][version]](http://browsenpm.org/package/dynamis)[![Build Status][build]](https://travis-ci.org/Swaagie/dynamis)[![Dependencies][david]](https://david-dm.org/Swaagie/dynamis)[![Coverage Status][cover]](https://coveralls.io/r/Swaagie/dynamis?branch=master)
 
 [version]: http://img.shields.io/npm/v/dynamis.svg?style=flat-square
